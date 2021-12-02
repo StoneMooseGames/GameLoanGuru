@@ -112,3 +112,28 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+glg_env/Scripts/wheel-3.9.exe
+glg_env/Scripts/wheel.exe
+glg_env/Scripts/wheel3.9.exe
+glg_env/Scripts/wheel3.exe
+glg_env/Scripts/sqlformat.exe
+glg_env/Scripts/pip3.exe
+glg_env/Scripts/pip.exe
+glg_env/Scripts/pip-3.9.exe
+glg_env/Scripts/pip3.9.exe
+glg_env/Scripts/pip3.exe
+glg_env/Scripts/pip.exe
+glg_env/Scripts/pydoc.bat
+glg_env/Scripts/deactivate.bat
+glg_env/Scripts/activate.bat
+glg_env/Scripts/sqlformat.exe
+glg_env/Scripts/pip3.exe
+glg_env/Scripts/sqlformat.exe
+glg_env/Scripts/sqlformat.exe
+glg_env/Scripts/pip.exe
+glg_env/Scripts/pip3.9.exe
+glg_env/Scripts/activate.fish
+glg_env/Scripts/deactivate.nu
+glg_env/Scripts/activate_this.py
+.gitignore
+glg_env/Scripts/activate.nu
