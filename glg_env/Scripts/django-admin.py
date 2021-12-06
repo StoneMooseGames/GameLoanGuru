@@ -1,4 +1,4 @@
-#!c:\users\miktz\desktop\koulumatsku\sovellusohjelmointi\gameloanguru\gameloanguru\glg_env\scripts\python.exe
+#!C:\Users\Jaani\GameLoanGuru\glg_env\Scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
