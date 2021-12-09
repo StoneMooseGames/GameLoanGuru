@@ -79,19 +79,19 @@ class GameInstance(models.Model):
         return f'{self.id} ({self.game.title})'
 
     
-    class Owner(models.Model):
-        """Model representing an owner."""
-        nickname = models.CharField(max_length=100)
+class Owner(models.Model):
+    """Model representing an owner."""
+    nickname = models.CharField(max_length=100)
         
-        #### HOW TO LINK TO 'USER'?
-        
-        class Meta:
-            ordering = ['nickname']
+    #### HOW TO LINK TO 'USER'?
 
-        def get_absolute_url(self):
-            """Returns the url to access a particular owner instance."""
-            return reverse('owner-detail', args=[str(self.id)])
+    class Meta:
+        ordering = ['nickname']
 
-        def __str__(self):
-            """String for representing the Model object."""
-            return f'{self.nickname}'
+    def get_absolute_url(self):
+        """Returns the url to access a particular owner instance."""
+        return reverse('owner-detail', args=[str(self.id)])
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return f'{self.nickname}'
