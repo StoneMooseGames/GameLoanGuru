@@ -1,10 +1,10 @@
 {% extends "mainapp/base.html" %}
 
 {% block page_header %}
-<div class="jumbotron jumbotron-fluid">
+<div style="background-color: #442020!important;" class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4">GameLoanGuru</h1>
-      <p>A network for loaning games to and from users</p>
+      <h1 style="color: red !important" class="display-4">GameLoanGuru</h1>
+      <p style="color: red !important">A network for loaning games to and from users</p>
     </div>
   </div>
 
@@ -21,9 +21,8 @@
 							To add your own games to your library and start loaning games from other users
 						</p>
 						<div class="more">
-							<a href="{% url 'users:register' %}" title="Title Link">
-								Register <i class="fa fa-angle-double-right"></i>
-							</a>
+							<a class="btn btn-primary" href="{% url 'users:register' %}" role="button">Register</a>
+							
 						</div>
 					</div>
 				</div>
@@ -65,4 +64,34 @@
 		<!-- /Boxes -->
 	</div>
 </div>
+<hr>
+<div class="container">
+	<h3>Check out the what available games users have for loaning right now.</h3>
+	
+	   <div class="row mb-3">
+		<div class="col-md-4 themed-grid-col">Name</div>
+		<div class="col-md-4 themed-grid-col">Genre</div>
+		<div class="col-md-4 themed-grid-col">Owner </div>
+	  </div>
+	   <ul>
+		<div class="row mb-3">
+			<div class="col-md-4 themed-grid-col">
+		   	{% for game in games %}
+				{{ game.title }}</div>
+				<div class="col-md-4 themed-grid-col">
+				{{ game.genre }}</div>
+				<div class="col-md-4 themed-grid-col">
+				{{ game.owner}}
+				</div>
+			{% empty %}
+				<div class="col-md-4 themed-grid-col">
+				No games added yet		
+				</div>
+				
+			{% endfor %}
+			</div>
+			
+		</div>
+	   </ul>
+<hr>
 {% endblock page_header %}
