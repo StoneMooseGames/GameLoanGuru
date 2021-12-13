@@ -12,7 +12,7 @@
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+    <nav style="background-color: #396EB0!important;" class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
         <a class="navbar-brand" href="{% url 'mainapp:index' %}">
             <img src="{% static 'GameLoanGuru.png' %}" 
             width="100" height="100" class="img-thumbnail" alt="GameloanguruLogo">
@@ -21,21 +21,21 @@
                 data-target="#navbarCollapse" aria-controls="navbarCollapse"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div  class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+                <li class="nav-item" >
+                    <a class="nav-link" style="color: #FC997C !important" href="{% url 'users:register' %}">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'mainapp:mygames' %}">My Games</a>
+                    <a class="nav-link" style="color: #FC997C !important" href="{% url 'mainapp:mygames' %}">My Games</a>
                     
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'mainapp:addgame' %}">Add Games</a>
+                    <a class="nav-link" style="color: #FC997C !important" href="{% url 'mainapp:addgame' %}">Add Games</a>
                     
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:usersindex' %}">Userindex</a>
+                    <a class="nav-link" style="color: #FC997C !important" href="{% url 'users:usersindex' %}">Userindex</a>
                     
                 </li>
                 
@@ -45,5 +45,6 @@
 
 
     {% block page_header %}{% endblock page_header %}
+    {% block content %}{% endblock content %}
 </body>
 </html>
