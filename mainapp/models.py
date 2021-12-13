@@ -76,12 +76,6 @@ class Game(models.Model):
         """Returns the url to access a detail record for this boardgame."""
         return reverse('bordgame-detail', args=[str(self.id)])
 
-    
-    
-
-
-
-    
 class Owner(models.Model):
     """Model representing an owner."""
     nickname = models.CharField(max_length=100)

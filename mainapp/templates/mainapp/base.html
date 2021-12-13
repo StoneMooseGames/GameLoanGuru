@@ -23,9 +23,9 @@
             <span class="navbar-toggler-icon"></span></button>
         <div  class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item" >
-                    <a class="nav-link" style="color: #FC997C !important" href="{% url 'users:register' %}">Register</a>
-                </li>
+               
+               
+                {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" style="color: #FC997C !important" href="{% url 'mainapp:mygames' %}">My Games</a>
                     
@@ -35,9 +35,21 @@
                     
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: #FC997C !important" href="{% url 'users:usersindex' %}">Userindex</a>
+                    <a class="nav-link" style="color: #FC997C !important" href="{% url 'users:logout' %}">Logout</a>
                     
                 </li>
+                
+                  
+                        
+                    {% else %}
+                    <li class="nav-item" >
+                        <a class="nav-link" style="color: #FC997C !important" href="{% url 'users:register' %}">Register</a>
+                    </li>
+                    <li class="nav-item"></li>
+                    <a class="nav-link" style="color: #FC997C !important" href="{% url 'users:login' %}">Login</a>
+                    </li>
+                    {% endif %}
+               
                 
             </ul>
         </div>
