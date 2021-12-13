@@ -1,16 +1,18 @@
+{% load bootstrap4 %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0", shrink-to-fit="no">
+    <title>GameLoanGuru</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
 </head>
 <body>
     
-<<<<<<< Updated upstream
-=======
-    <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+    <nav style="background-color: #396EB0!important;" class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
         <a class="navbar-brand" href="{% url 'mainapp:index' %}">
             <img src="{% static 'GameLoanGuru.png' %}" 
             width="100" height="100" class="img-thumbnail" alt="GameloanguruLogo">
@@ -19,23 +21,29 @@
                 data-target="#navbarCollapse" aria-controls="navbarCollapse"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div  class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
+               
+               
+                {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:register' %}">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'mainapp:mygames' %}">My Games</a>
+                    <a class="nav-link" style="color: #FC997C !important" href="{% url 'mainapp:mygames' %}">My Games</a>
                     
                 </li>
+                
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'mainapp:addgame' %}">Add Games</a>
-                    
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:usersindex' %}">Userindex</a>
-                    
-                </li>
+                    <a class="nav-link" style="color: #FC997C !important" href="{% url 'users:logout' %}">Logout,{{ user.username }}</a>
+               </li>
+                
+                    {% else %}
+                    <li class="nav-item" >
+                        <a class="nav-link" style="color: #FC997C !important" href="{% url 'users:register' %}">Register</a>
+                    </li>
+                    <li class="nav-item"></li>
+                    <a class="nav-link" style="color: #FC997C !important" href="{% url 'users:login' %}">Login</a>
+                    </li>
+                    {% endif %}
+               
                 
             </ul>
         </div>
@@ -44,7 +52,5 @@
 
     {% block page_header %}{% endblock page_header %}
     {% block content %}{% endblock content %}
-    
->>>>>>> Stashed changes
 </body>
 </html>

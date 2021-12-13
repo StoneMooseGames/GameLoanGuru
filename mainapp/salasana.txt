@@ -1,0 +1,6 @@
+admin: jaani
+pass: Lauta1234
+
+admin: admin
+pass: Lauta1234
+
