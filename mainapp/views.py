@@ -8,8 +8,11 @@ def index(request):
     context = {'allgames' : allgames}
     return render(request, 'mainapp/index.html', context)
 
+
 def mygames(request):
-        return render(request, 'mainapp/mygames.html')
+    allgames = Game.objects.filter(owner=request.user).order_by('date_added')
+    context = {'allgames' : allgames}
+    return render(request, 'mainapp/mygames.html', context)
 
 def addgame(request):
     return render(request, 'mainapp/addgame.html')

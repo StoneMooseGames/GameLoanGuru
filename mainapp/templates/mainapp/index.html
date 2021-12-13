@@ -10,7 +10,7 @@
   {% endblock page_header %}
   {% block content %}
   {% if user.is_authenticated %}
-  <li>Welcome back, {{ user.username }}.</li>
+ 
   {% else %}
   <div class="container">
 	<div class="row">
@@ -68,25 +68,34 @@
 		<!-- /Boxes -->
 	</div>
 </div>
-<hr>
 {% endif %}
+<hr>
+
 <div class="container">
 	<h3>Check out the what available games users have for loaning right now.</h3>
 	
-	   <div class="row mb-3">
-		<div class="col-md-4 themed-grid-col">Name</div>
-		<div class="col-md-4 themed-grid-col">Genre</div>
-		<div class="col-md-4 themed-grid-col">Owner </div>
+	   <div class="row">
+		<div class="col-md-3 themed-grid-col">Name</div>
+		<div class="col-md-3 themed-grid-col">Genre</div>
+		<div class="col-md-3 themed-grid-col">Owner </div>
+		<div class="col-md-3 themed-grid-col"></div>
+		<div class="col-md-3 themed-grid-col"></div>
 	  </div>
-	  
-		<div class="row mb-3">
+	  <hr>
+		<div class="row">
 			
 		   	{% for game in allgames %}
-			   <div class="col-md-4 themed-grid-col">{{ game.title }}</div>
-				<div class="col-md-4 themed-grid-col">{{ game.genre.name }}</div>
-				<div class="col-md-4 themed-grid-col">{{ game.owner}}</div>
+			   <div class="col-md-3 themed-grid-col">{{ game.title }}</div>
+				<div class="col-md-3 themed-grid-col">{{ game.genre.name }}</div>
+				<div class="col-md-3 themed-grid-col">{{ game.owner}}</div>	
+				{% if user.is_authenticated %}
+				<div class="col-md-3 themed-grid-col"><a class="btn btn-primary" href="{% url 'users:register' %}" role="button">Loan game</a></div>
+				{% else %}
+				<div class="col-md-3 themed-grid-col"></div>
+				{% endif %}
+				
 			{% empty %}
-				<div class="col-md-4 themed-grid-col">
+				<div class="col-md-1 themed-grid-col">
 				No games added yet		
 				</div>
 				
@@ -96,4 +105,6 @@
 </div>
 	   
 <hr>
+
+
 {% endblock content %}
