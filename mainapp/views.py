@@ -4,11 +4,12 @@ from .models import Game
 
 # Create your views here.
 def index(request):
-    return render(request, 'mainapp/index.html')
+    allgames = Game.objects.order_by('date_added')
+    context = {'allgames' : allgames}
+    return render(request, 'mainapp/index.html', context)
 
 def mygames(request):
-    return render(request, 'mainapp/mygames.html')
-
+        return render(request, 'mainapp/mygames.html')
 
 def addgame(request):
     return render(request, 'mainapp/addgame.html')
