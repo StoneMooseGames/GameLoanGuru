@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     #MyApps
     'mainapp',
     'users',
+
+    #Thirt party apps
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
