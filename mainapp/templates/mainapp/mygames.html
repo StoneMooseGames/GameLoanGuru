@@ -14,13 +14,12 @@
           <div class="col-md-3 themed-grid-col">Genre</div>
           <div class="col-md-3 themed-grid-col">Owner </div>
           <div class="col-md-3 themed-grid-col"></div>
-          <div class="col-md-3 themed-grid-col"></div>
         </div>
        <ul>
         <div class="row">
 			
           {% for game in allgames %}
-          <div class="col-md-3 themed-grid-col">{{ game.title }}</div>
+          <div class="col-md-3 themed-grid-col"><a href="{% url 'mainapp:game' game.id %}">{{ game.title }}</a></div>
           <div class="col-md-3 themed-grid-col">{{ game.genre.name }}</div>
           <div class="col-md-3 themed-grid-col">{{ game.owner}}</div>
           <div class="col-md-3 themed-grid-col"></div>

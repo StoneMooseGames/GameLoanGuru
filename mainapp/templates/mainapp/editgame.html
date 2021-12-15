@@ -8,4 +8,10 @@
   </div>
   {% endblock page_header %}
   {% block content %}
+  <form action = "{% url 'mainapp:editgame' game.id %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+   <input type="submit" value="Save">
+  </form>
+  
   {% endblock content %}

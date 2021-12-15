@@ -59,7 +59,7 @@ class Game(models.Model):
     summary = models.TextField(max_length=200, help_text='Enter a brief description of the book')
 
     # Genre. A game can belong to several genre's, and many games to same genre's, so that's why we use ManyToManyField.
-    genre = models.ManyToManyField(Genre, help_text='Select a genre for this boardgame')
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
 
     #Picture
     #RESEARCH HOW TO ADD PICTURE
@@ -69,7 +69,7 @@ class Game(models.Model):
     
     
     def __str__(self):
-        """Title of the Boradgame"""
+        """Title of the Boardgame"""
         return self.title
     
     def get_absolute_url(self):
