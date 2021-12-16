@@ -4,15 +4,6 @@ from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 
-#Just a temporary userindex function
-def userindex(request):
-    return render(request, 'registration/usersindex.html')
-
-#Temporary register - views    
-#def register(request):
-#    return render(request, 'registration/register.html')
-
-
 def register(request):
     """Register a new user"""
     if request.method != 'POST':

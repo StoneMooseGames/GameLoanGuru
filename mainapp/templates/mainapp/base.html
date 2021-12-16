@@ -27,13 +27,16 @@
                
                 {% if user.is_authenticated %}
                 <li class="nav-item">
+                  <li class="nav-item">
+                    <a class="nav-link" style="color: #FC997C !important"  href="{% url 'mainapp:allgames' %}">All Games</a>
+                </li>
                     <a class="nav-link" style="color: #FC997C !important" href="{% url 'mainapp:mygames' %}">My Games</a>
                     
                 </li>
                 
                 <li class="nav-item">
                     <a class="nav-link" style="color: #FC997C !important" href="{% url 'users:logout' %}">Logout,{{ user.username }}</a>
-               </li>
+                </li>
                
                     {% else %}
                     <li class="nav-item" >
@@ -54,3 +57,8 @@
     {% block content %}{% endblock content %}
 </body>
 </html>
+
+
+
+
+

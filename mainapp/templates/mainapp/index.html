@@ -70,41 +70,31 @@
 </div>
 {% endif %}
 <hr>
-
 <div class="container">
 	<h3>Check out what available games users have for loaning right now.</h3>
 	
 	   <div class="row">
 		<div class="col-md-3 themed-grid-col">Name</div>
-		<div class="col-md-3 themed-grid-col">Genre</div>
-		<div class="col-md-3 themed-grid-col">Owner </div>
+		<div class="col-md-3 themed-grid-col">Owner</div>
+		<div class="col-md-3 themed-grid-col">Summary</div>
 		<div class="col-md-3 themed-grid-col"></div>
-		<div class="col-md-3 themed-grid-col"></div>
+		
 	  </div>
 	  <hr>
 		<div class="row">
 			
 		   	{% for game in allgames %}
-			   <div class="col-md-3 themed-grid-col">{{ game.title }}</div>
-				<div class="col-md-3 themed-grid-col">{{ game.genre.name }}</div>
-				<div class="col-md-3 themed-grid-col">{{ game.owner}}</div>	
-				{% if user.is_authenticated %}
-				<div class="col-md-3 themed-grid-col"><a class="btn btn-primary" href="{% url 'users:register' %}" role="button">Loan game</a></div>
-				{% else %}
-				<div class="col-md-3 themed-grid-col"></div>
-				{% endif %}
-				
+			   <div class="col-md-3 themed-grid-col">{{ game.name }}</div>
+				<div class="col-md-3 themed-grid-col">{{ game.owner}}</div>
+				<div class="col-md-3 themed-grid-col">{{ game.summary}}</div>	
+				<div class="col-md-3 themed-grid-col"></div>				
 			{% empty %}
 				<div class="col-md-1 themed-grid-col">
-				No games added yet		
+				No games available at the moment		
 				</div>
 				
 			{% endfor %}
 		</div>
-			
 </div>
-	   
-<hr>
-
 
 {% endblock content %}

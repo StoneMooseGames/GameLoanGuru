@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from .models import Genre, Game, GameInstance, Owner
+from .models import Game, Loan
 
-admin.site.register(Genre)
+
 admin.site.register(Game)
-admin.site.register(GameInstance)
-admin.site.register(Owner)
+admin.site.register(Loan)
+
 # Register your models here.

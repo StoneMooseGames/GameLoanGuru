@@ -1,10 +1,14 @@
 from django import forms
-from django.forms import fields
+from .models import Game, Loan
 
-from .models import Game
-
-class Gameform(forms.ModelForm):
+class GameForm(forms.ModelForm):
     class Meta:
         model = Game
-        fields = ['title', 'genre', 'summary']
-        labels = {'name' : ''}
+        fields = ['name', 'summary', 'status']
+        labels = {'name': 'Name:', 'summary': 'Summary:', 'status' : 'status'}
+
+class LoanForm(forms.ModelForm):
+    class Meta:
+        model = Loan
+        fields = ['action']
+        labels = {'action': 'Action:'}

@@ -1,62 +1,132 @@
-from django.http.response import Http404
 from django.shortcuts import render, redirect
-
-from mainapp.forms import Gameform
-
-from .models import Game
+from django.contrib.auth.decorators import login_required
+from django.http import Http404
 
 # Create your views here.
+from .models import Game, Loan
+from .forms import GameForm, LoanForm
+
 def index(request):
     allgames = Game.objects.order_by('date_added')
     context = {'allgames' : allgames}
     return render(request, 'mainapp/index.html', context)
+    
+def allgames(request):
+    """Show all games."""
+    games = Game.objects.order_by('date_added')  
+    context = {'games': games}
+    return render(request, 'mainapp/allgames.html', context)
 
-
+@login_required
 def mygames(request):
-    allgames = Game.objects.filter(owner=request.user).order_by('date_added')
-    context = {'allgames' : allgames}
+    mygames = Game.objects.filter(owner=request.user).order_by('date_added')
+    context = {'mygames' : mygames}
     return render(request, 'mainapp/mygames.html', context)
 
+@login_required
+def game(request, game_id):
+    """Show a single book and all it's reviews."""
+    game = Game.objects.get(id=game_id)
+    owner = game.owner
+    summary = game.summary
+    status = game.status
+    #loans = Game.loan_set.order_by('-date_added')
+    context = {'game': game, 'summary': summary, 'status': status} #'loans': loans}
+    return render(request, 'mainapp/game.html', context)
+
+@login_required
 def addgame(request):
+
+
+    """Add a new game."""
     if request.method != 'POST':
-        #No data submitted; create a blank form.
-        newGameForm = Gameform()
+        #No data submitted; create a blank form
+        form = GameForm()
     else:
         # POST data submitted; process data.
-        form = Gameform(data=request.POST)
+        form = GameForm(data=request.POST)
         if form.is_valid():
-            newGame = form.save(commit=False)
-            newGame.owner = request.user
-            newGame.save()
-            return redirect('mainapp:mygames')
-    #Display a blank or invalid form
-    context = {'form' : newGameForm}
+            newgame = form.save(commit=False)
+            newgame.owner = request.user
+            newgame.save()
+            return redirect('mainapp:allgames')
+    
+    #Display a blank or invalid form.
+    context = {'form':form}
     return render(request, 'mainapp/addgame.html', context)
 
+login_required
 def editgame(request, game_id):
-    #Edit an existing game.
+    """Edit an existing game."""
+    
     game = Game.objects.get(id=game_id)
+    
+    # Make sure the game belongs to the current user.
     if game.owner != request.user:
         raise Http404
+
     if request.method != 'POST':
-        #No data submitted; create a blank form.
-        form = Gameform(instance=game)
+        # Initial request; pre-fill form with the current review.
+        form = GameForm(instance=game)
     else:
         # POST data submitted; process data.
-        form = Gameform(instance=game, data=request.POST)
+        form = GameForm(instance=game, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('mainapp:mygames')
-    #Display a blank or invalid form
-    context = {'game' : game, 'form' : form}
+            return redirect('mainapp:game', game_id=game.id)
+
+    context = {'game' : game, 'form': form}
     return render(request, 'mainapp/editgame.html', context)
+
+def new_loan(request, game_id):
+    """Show a loan for a certain game."""
+    game = Game.objects.get(id=game_id)
+    #loan = Loan.objects.order_by('date_added') 
+
+    if request.method != 'POST':
+        #No data submitted; process data.
+        form = LoanForm(instance=game)
+    else:
+        # POST data submitted; process data.
+        form = LoanForm(data=request.POST)
+        if form.is_valid():
+            reserve = form.save(commit=False)
+            reserve.owner = request.user
+            reserve.game = game
+
+            if loan.action == 'r':
+                game.status = 'r'
+            elif loan.action == 'l':
+                game.status = 'o'
+            else:
+                game.status = 'a'
+            reserve.save()
+            return redirect('mainapp:game', game_id=game_id)
     
+    #Display a blank or invalid form.
+    context = {'game': game, 'form': form}
+    return render(request, 'mainapp/reserve.html', context)
 
-
-def game(request, game_id):
-    """Show a single boardgame and all it's features and properties"""
-    game = Game.objects.get(id=game_id) 
-       
-    #picture RESEARCH how to set a game image for a game. Great if user can upload it.
-    context = {'game': game }
-    return render(request, 'mainapp/game.html', context)
+@login_required 
+def reserve(request, game_id):
+    """Add a new reservation to loan a particular boardgame."""
+    game = Game.objects.get(id=game_id)
+    
+    if request.method != 'POST':
+        #No data submitted; process data.
+        form = LoanForm()
+    else:
+        # POST data submitted; process data.
+        form = LoanForm(data=request.POST)
+        if form.is_valid():
+            reserve = form.save(commit=False)
+            reserve.owner = request.user
+            reserve.game = game
+            game.status = 'r'
+            
+            reserve.save()
+            return redirect('mainapp:game', game_id=game_id)
+    
+    #Display a blank or invalid form.
+    context = {'game': game, 'form': form}
+    return render(request, 'mainapp/reserve.html', context)
